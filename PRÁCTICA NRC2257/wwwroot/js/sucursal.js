@@ -3,37 +3,36 @@
 }
 
 let config = {
-    headers: ['#', 'Nombre', 'Descripción'],
-    properties: ['id', 'nombre', 'descripcion'],
-    editable: true,
+    headers: ['#', 'Nombre', 'Dirección'],
+    properties: ['id', 'nombre', 'direccion'],
     deletable: true
 };
 
 function renderTable() {
-    if (!getValue('descripcion-input'))
+    if (!getValue('nombre-input') && !getValue('direccion-input'))
         listar();
     else
         filtrar();
 }
 
 async function listar() {
-    config.url = 'TipoMedicamento/listar';
+    config.url = 'Sucursal/listar';
     config.method = 'get';
     createTable(config);
 }
 
 async function filtrar() {
     let form = new FormData(document.getElementById('search-form'));
-    config.url = 'TipoMedicamento/filtrar';
+    config.url = 'Sucursal/filtrar';
     config.method = 'post';
     createTable(config, form);
 }
 
 async function guardar() {
-    if (!getValue('nombre-input') || !getValue('descripcion-input')) return;
+    if (!getValue('nombre-input') || !getValue('direccion-input')) return;
 
     let form = new FormData(document.getElementById('search-form'));
-    config.url = 'TipoMedicamento/guardar';
+    config.url = 'Sucursal/guardar';
     config.method = 'post';
     fetchPost(config.url, 'text', form, res => {
         limpiar();

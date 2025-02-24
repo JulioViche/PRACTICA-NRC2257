@@ -1,9 +1,9 @@
 ﻿
 @{
-    ViewData["Title"] = "Tipos de Medicamento";
+    ViewData["Title"] = "Sucursales";
 }
 
-<h1>Registro de Tipos de Medicamento</h1>
+<h1>Registro de Sucursales</h1>
 
 <fieldset class="row mt-3">
     <form id="search-form" method="post" class="col-md-9 col-12 row">
@@ -11,14 +11,17 @@
             <input id="nombre-input" class="form-control" name="Nombre" type="text" placeholder="Nombre">
         </div>
         <div class="col-9 mb-2">
-            <input id="descripcion-input" class="form-control" name="Descripcion" type="text" placeholder="Descripcion" onkeyup="renderTable()">
+            <input id="direccion-input" class="form-control" name="Direccion" type="text" placeholder="Dirección">
         </div>
     </form>
     <div class="col row">
-        <div class="col-6 mb-2">
+        <div class="col mb-2">
+            <button class="btn btn-primary w-100" onclick="renderTable()">Buscar</button>
+        </div>
+        <div class="col mb-2">
             <button class="btn btn-primary w-100" onclick="guardar()">Guardar</button>
         </div>
-        <div class="col-6 mb-2">
+        <div class="col mb-2">
             <button class="btn btn-danger w-100" onclick="limpiar()">Limpiar</button>
         </div>
     </div>
@@ -28,4 +31,4 @@
 
 <div id="datatable-container" class="d-flex justify-content-center w-100"></div>
 
-<script src="~/js/tipomedicamento.js"></script>
+<script src="~/js/sucursal.js"></script>
