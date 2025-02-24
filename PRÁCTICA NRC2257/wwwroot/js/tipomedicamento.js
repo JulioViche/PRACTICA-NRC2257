@@ -5,6 +5,7 @@
 let config = {
     headers: ['#', 'Nombre', 'Descripción'],
     properties: ['id', 'nombre', 'descripcion'],
+    idProperty: 'id',
     editable: true,
     deletable: true
 };
@@ -37,6 +38,16 @@ async function guardar() {
     config.method = 'post';
     fetchPost(config.url, 'text', form, res => {
         limpiar();
+    });
+}
+
+async function editar(id) {
+    config.url = 'TipoMedicamento/recuperar?id=' + id;
+    config.method = 'get';
+    fetchGet(config.url, 'json', res => {
+        setValue('id-input', res['id']);
+        setValue('nombre-input', res['nombre']);
+        setValue('descripcion-input', res['descripcion']);
     });
 }
 

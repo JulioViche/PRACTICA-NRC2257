@@ -71,8 +71,8 @@ function generateTableContent(config, res) {
         for (property of config.properties) content += `<td class="px-lg-3 px-1">${obj[property]}</td>`;
         if (config.editable || config.deletable) {
             content += '<td>';
-            if (config.editable) content += '<a title="Editar" class="px-2 text-primary" href="#"><i class="fa-solid fa-pen-to-square"></i></a>';
-            if (config.deletable) content += '<a title="Eliminar" class="px-2 text-danger" href="#"><i class="fa-solid fa-trash-can"></i></a>';
+            if (config.editable) content += `<a title="Editar" class="px-2 text-primary" onclick="editar(${obj[config.idProperty]})"><i class="fa-solid fa-pen-to-square"></i></a>`;
+            if (config.deletable) content += `<a title="Eliminar" class="px-2 text-danger onclick="eliminar(${obj[config.idProperty]})"><i class="fa-solid fa-trash-can"></i></a>`;
             content += '</td>';
         }
         content += '</tr>';

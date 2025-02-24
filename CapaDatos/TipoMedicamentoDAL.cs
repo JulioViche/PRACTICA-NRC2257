@@ -27,6 +27,25 @@ namespace CapaDatos
             return lista;
         }
 
+        static private TipoMedicamentoCLS Buscar(SqlDataReader reader)
+        {
+            TipoMedicamentoCLS tipoMedicamento = null;
+            if (reader != null)
+            {
+                int idOrdinal = reader.GetOrdinal("IIDTIPOMEDICAMENTO");
+                int nombreOrdinal = reader.GetOrdinal("NOMBRE");
+                int descripcionOrdinal = reader.GetOrdinal("DESCRIPCION");
+                while (reader.Read())
+                {
+                    tipoMedicamento = new TipoMedicamentoCLS();
+                    tipoMedicamento.Id = reader.GetInt32(idOrdinal);
+                    tipoMedicamento.Nombre = reader.IsDBNull(nombreOrdinal) ? "" : reader.GetString(nombreOrdinal);
+                    tipoMedicamento.Descripcion = reader.IsDBNull(descripcionOrdinal) ? "" : reader.GetString(descripcionOrdinal);
+                }
+            }
+            return tipoMedicamento;
+        }
+
         static public List<TipoMedicamentoCLS> Listar()
         {
             List<TipoMedicamentoCLS> lista = null;
@@ -61,6 +80,18 @@ namespace CapaDatos
                 guardado = cmd.ExecuteNonQuery();
             });
             return guardado;
+        }
+
+        static public TipoMedicamentoCLS Recuperar(int id)
+        {
+            TipoMedicamentoCLS tipoMedicamento = null;
+            Connection.ExecuteQuery("SELECT * FROM TipoMedicamento WHERE BHABILITADO = 1 AND IIDTIPOMEDICAMENTO = @id", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@id", id);
+                tipoMedicamento = Buscar(cmd.ExecuteReader());
+            });
+            return tipoMedicamento;
         }
     }
 }

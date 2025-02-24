@@ -18,5 +18,10 @@ namespace CapaNegocio
         {
             return TipoMedicamentoDAL.Guardar(tipoMedicamento);
         }
+
+        static public TipoMedicamentoCLS Recuperar(int id)
+        {
+            return TipoMedicamentoDAL.Recuperar(id);
+        }
     }
 }

@@ -24,5 +24,10 @@ namespace PRÁCTICA_NRC2257.Controllers
         {
             return TipoMedicamentoBL.Guardar(tipoMedicamento);
         }
+
+        public TipoMedicamentoCLS Recuperar(int id)
+        {
+            return TipoMedicamentoBL.Recuperar(id);
+        }
     }
 }

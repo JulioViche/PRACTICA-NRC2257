@@ -7,10 +7,13 @@
 
 <fieldset class="row mt-3">
     <form id="search-form" method="post" class="col-md-9 col-12 row">
+        <div class="col-1 mb-2">
+            <input id="id-input" class="form-control" name="Id" type="text" placeholder="Id">
+        </div>
         <div class="col-3 mb-2">
             <input id="nombre-input" class="form-control" name="Nombre" type="text" placeholder="Nombre">
         </div>
-        <div class="col-9 mb-2">
+        <div class="col-8 mb-2">
             <input id="descripcion-input" class="form-control" name="Descripcion" type="text" placeholder="Descripcion" onkeyup="renderTable()">
         </div>
     </form>
