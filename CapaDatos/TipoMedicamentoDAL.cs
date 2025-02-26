@@ -69,6 +69,18 @@ namespace CapaDatos
             return lista;
         }
 
+        static public TipoMedicamentoCLS Recuperar(int id)
+        {
+            TipoMedicamentoCLS tipoMedicamento = null;
+            Connection.ExecuteQuery("SELECT * FROM TipoMedicamento WHERE BHABILITADO = 1 AND IIDTIPOMEDICAMENTO = @id", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@id", id);
+                tipoMedicamento = Buscar(cmd.ExecuteReader());
+            });
+            return tipoMedicamento;
+        }
+
         static public int Guardar(TipoMedicamentoCLS tipoMedicamento)
         {
             int guardado = 0;
@@ -82,16 +94,18 @@ namespace CapaDatos
             return guardado;
         }
 
-        static public TipoMedicamentoCLS Recuperar(int id)
+        static public int Actualizar(TipoMedicamentoCLS tipoMedicamento)
         {
-            TipoMedicamentoCLS tipoMedicamento = null;
-            Connection.ExecuteQuery("SELECT * FROM TipoMedicamento WHERE BHABILITADO = 1 AND IIDTIPOMEDICAMENTO = @id", (cmd) =>
+            int actualizado = 0;
+            Connection.ExecuteQuery("uspActualizarTipoMedicamento", (cmd) =>
             {
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@id", id);
-                tipoMedicamento = Buscar(cmd.ExecuteReader());
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", tipoMedicamento.Id);
+                cmd.Parameters.AddWithValue("@nombre", tipoMedicamento.Nombre);
+                cmd.Parameters.AddWithValue("@descripcion", tipoMedicamento.Descripcion);
+                actualizado = cmd.ExecuteNonQuery();
             });
-            return tipoMedicamento;
+            return actualizado;
         }
     }
 }

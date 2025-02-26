@@ -30,15 +30,23 @@ async function filtrar() {
     createTable(config, form);
 }
 
-async function guardar() {
-    if (!getValue('nombre-input') || !getValue('descripcion-input')) return;
+async function guardar(existe) {
+    if (!getValue('nombre-input') || !getValue('descripcion-input')) {
+        alert('Campos vacíos');
+        return;
+    }
+
+    if (!existe) setValue('id-input', 0);
 
     let form = new FormData(document.getElementById('search-form'));
     config.url = 'TipoMedicamento/guardar';
     config.method = 'post';
+
     fetchPost(config.url, 'text', form, res => {
         limpiar();
     });
+
+    renderTable();
 }
 
 async function editar(id) {

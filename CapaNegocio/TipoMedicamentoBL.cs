@@ -14,14 +14,14 @@ namespace CapaNegocio
             return TipoMedicamentoDAL.Filtrar(tipoMedicamento);
         }
 
-        static public int Guardar(TipoMedicamentoCLS tipoMedicamento)
-        {
-            return TipoMedicamentoDAL.Guardar(tipoMedicamento);
-        }
-
         static public TipoMedicamentoCLS Recuperar(int id)
         {
             return TipoMedicamentoDAL.Recuperar(id);
+        }
+
+        static public int Guardar(TipoMedicamentoCLS tipoMedicamento)
+        {
+            return tipoMedicamento.Id == 0 ? TipoMedicamentoDAL.Guardar(tipoMedicamento) : TipoMedicamentoDAL.Actualizar(tipoMedicamento);
         }
     }
 }
