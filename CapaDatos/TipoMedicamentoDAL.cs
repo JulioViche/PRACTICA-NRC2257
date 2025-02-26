@@ -107,5 +107,17 @@ namespace CapaDatos
             });
             return actualizado;
         }
+
+        static public int Eliminar(int id)
+        {
+            int eliminado = 0;
+            Connection.ExecuteQuery("uspEliminarTipoMedicamento", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                eliminado = cmd.ExecuteNonQuery();
+            });
+            return eliminado;
+        }
     }
 }

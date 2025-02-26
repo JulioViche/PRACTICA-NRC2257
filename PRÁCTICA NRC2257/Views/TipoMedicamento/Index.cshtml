@@ -3,26 +3,48 @@
     ViewData["Title"] = "Tipos de Medicamento";
 }
 
+<div id="save-modal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="modal-label" class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <form id="modal-form" method="post" class="row">
+                    <div id="modal-id-group" class="col-2 mb-2">
+                        <label class="col-form-label mb-0">Id:</label>
+                        <input id="modal-id-input" class="form-control" name="Id" type="text" placeholder="?" contenteditable="false" required readonly>
+                    </div>
+                    <div class="col-8 mb-2">
+                        <label class="col-form-label mb-0">Nombre:</label>
+                        <input id="modal-nombre-input" class="form-control" name="Nombre" type="text" required>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label class="col-form-label mb-0">Descripcion:</label>
+                        @* <input id="modal-descripcion-input" class="form-control" name="Descripcion" type="text" required> *@
+                        <textarea id="modal-descripcion-input" class="form-control" name="Descripcion" type="text" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary w-100" onclick="guardar()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <h1>Registro de Tipos de Medicamento</h1>
 
 <fieldset class="row mt-3">
     <form id="search-form" method="post" class="col-md-9 col-12 row">
-        <div class="col-1 mb-2">
-            <input id="id-input" class="form-control" name="Id" type="text" placeholder="Id">
-        </div>
-        <div class="col-3 mb-2">
-            <input id="nombre-input" class="form-control" name="Nombre" type="text" placeholder="Nombre">
-        </div>
         <div class="col-8 mb-2">
             <input id="descripcion-input" class="form-control" name="Descripcion" type="text" placeholder="Descripcion" onkeyup="renderTable()">
         </div>
     </form>
     <div class="col row">
         <div class="col-6 mb-2">
-            <button class="btn btn-primary w-100" onclick="guardar(false)">Crear</button>
-        </div>
-        <div class="col-6 mb-2">
-            <button class="btn btn-primary w-100" onclick="guardar(true)">Actualizar</button>
+            <button class="btn btn-success w-100" onclick="crear()">Crear</button>
         </div>
         <div class="col-6 mb-2">
             <button class="btn btn-danger w-100" onclick="limpiar()">Limpiar</button>

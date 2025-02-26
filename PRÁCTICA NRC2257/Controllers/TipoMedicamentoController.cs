@@ -29,5 +29,10 @@ namespace PRÁCTICA_NRC2257.Controllers
         {
             return TipoMedicamentoBL.Guardar(tipoMedicamento);
         }
+
+        public int Eliminar(int id)
+        {
+            return TipoMedicamentoBL.Eliminar(id);
+        }
     }
 }

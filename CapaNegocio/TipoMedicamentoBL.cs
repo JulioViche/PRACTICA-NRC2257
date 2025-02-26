@@ -23,5 +23,10 @@ namespace CapaNegocio
         {
             return tipoMedicamento.Id == 0 ? TipoMedicamentoDAL.Guardar(tipoMedicamento) : TipoMedicamentoDAL.Actualizar(tipoMedicamento);
         }
+
+        static public int Eliminar(int id)
+        {
+            return TipoMedicamentoDAL.Eliminar(id);
+        }
     }
 }

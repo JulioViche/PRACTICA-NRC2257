@@ -1,4 +1,22 @@
-﻿async function fetchGet(url, type, callback) {
+﻿toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
+
+async function fetchGet(url, type, callback) {
     try {
         let root = document.getElementById('root').value;
         let absoluteUrl = window.location.protocol + '//' + window.location.host + '/' + root + url;
@@ -47,7 +65,7 @@ function createTable(config, form) {
     if (!table) {
         table = document.createElement('table');
         table.setAttribute('id', 'datatable');
-        table.classList.add('table', 'table-sm', 'table-hover', 'table-responsive', 'w-auto');
+        table.classList.add('table', 'table-sm', 'table-hover', 'table-responsive', 'w-100');
         tableContainer.appendChild(table);
     }
 
@@ -72,7 +90,7 @@ function generateTableContent(config, res) {
         if (config.editable || config.deletable) {
             content += '<td>';
             if (config.editable) content += `<a title="Editar" class="px-2 text-primary" onclick="editar(${obj[config.idProperty]})"><i class="fa-solid fa-pen-to-square"></i></a>`;
-            if (config.deletable) content += `<a title="Eliminar" class="px-2 text-danger onclick="eliminar(${obj[config.idProperty]})"><i class="fa-solid fa-trash-can"></i></a>`;
+            if (config.deletable) content += `<a title="Eliminar" class="px-2 text-danger" onclick="eliminar(${obj[config.idProperty]}, '${obj['nombre']}')"><i class="fa-solid fa-trash-can"></i></a>`;
             content += '</td>';
         }
         content += '</tr>';
@@ -80,4 +98,30 @@ function generateTableContent(config, res) {
     content += '</tbody>';
 
     return content;
+}
+
+function confirmacion(titulo = 'Confirmación', texto = 'No se puede revertir', callback) {
+    Swal.fire({
+        title: titulo,
+        text: texto,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí",
+        cancelButtonText: "No"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            callback();
+        } else {
+            error('Cancelado', 'Acción cancelada');
+        }
+    });
+}
+
+function error(titulo, texto) {
+    toastr.error(texto, titulo);
+}
+function exito(titulo, texto) {
+    toastr.success(texto, titulo);
 }
