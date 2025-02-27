@@ -43,7 +43,6 @@ async function guardar() {
 
         fetchPost(config.url, 'text', form, res => {
             renderTable();
-            //limpiar();
             exito('Guardado', 'Registro guardado exitosamente');
         });
 

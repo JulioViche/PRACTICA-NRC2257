@@ -100,7 +100,7 @@ function generateTableContent(config, res) {
     return content;
 }
 
-function confirmacion(titulo = 'Confirmación', texto = 'No se puede revertir', callback) {
+function confirmacion(titulo = 'Confirmación', texto, callback) {
     Swal.fire({
         title: titulo,
         text: texto,
