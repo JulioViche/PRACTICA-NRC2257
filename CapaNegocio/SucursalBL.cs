@@ -15,9 +15,19 @@ namespace CapaNegocio
             return SucursalDAL.Filtrar(sucursal);
         }
 
+        static public SucursalCLS Recuperar(int id)
+        {
+            return SucursalDAL.Recuperar(id);
+        }
+
         static public int Guardar(SucursalCLS sucursal)
         {
             return SucursalDAL.Guardar(sucursal);
+        }
+
+        static public int Eliminar(int id)
+        {
+            return SucursalDAL.Eliminar(id);
         }
     }
 }

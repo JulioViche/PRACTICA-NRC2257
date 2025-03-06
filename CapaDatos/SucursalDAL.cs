@@ -51,17 +51,42 @@ namespace CapaDatos
             return lista;
         }
 
+        static public SucursalCLS Recuperar(int id)
+        {
+            SucursalCLS sucursal = null;
+            Connection.ExecuteQuery("uspRecuperarSucursal", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@iidsucursal", id);
+                sucursal = Leer(cmd.ExecuteReader())[0];
+            });
+            return sucursal;
+        }
+
         static public int Guardar(SucursalCLS sucursal)
         {
             int guardado = 0;
-            Connection.ExecuteQuery("INSERT INTO SUCURSAL(NOMBRE, DIRECCION, BHABILITADO) VALUES(@nombre, @direccion, 1);", (cmd) =>
+            Connection.ExecuteQuery("uspGuardarSucursal", (cmd) =>
             {
-                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@iidsucursal", sucursal.Id);
                 cmd.Parameters.AddWithValue("@nombre", sucursal.Nombre);
                 cmd.Parameters.AddWithValue("@direccion", sucursal.Direccion);
                 guardado = cmd.ExecuteNonQuery();
             });
             return guardado;
+        }
+
+        static public int Eliminar(int id)
+        {
+            int eliminado = 0;
+            Connection.ExecuteQuery("uspEliminarSucursal", (cmd) =>
+            {
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                eliminado = cmd.ExecuteNonQuery();
+            });
+            return eliminado;
         }
     }
 }

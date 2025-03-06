@@ -65,14 +65,25 @@ function createTable(config, form) {
     if (!table) {
         table = document.createElement('table');
         table.setAttribute('id', 'datatable');
-        table.classList.add('table', 'table-sm', 'table-hover', 'table-responsive', 'w-100');
+        table.classList.add('table', 'table-sm', 'table-dark','table-hover', 'table-responsive', 'w-100');
         tableContainer.appendChild(table);
     }
 
     if (config.method === 'get')
-        fetchGet(config.url, 'json', res => table.innerHTML = generateTableContent(config, res));
+        fetchGet(config.url, 'json', res => {
+            table.innerHTML = generateTableContent(config, res);
+            $('#datatable').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                pageLength: 5,
+                order: [[0, 'asc']],
+            });
+        });
     if (config.method === 'post')
-        fetchPost(config.url, 'json', form, res => table.innerHTML = generateTableContent(config, res));
+        fetchPost(config.url, 'json', form, res => {
+            table.innerHTML = generateTableContent(config, res);
+        });
 }
 
 function generateTableContent(config, res) {
